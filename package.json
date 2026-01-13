@@ -1,22 +1,21 @@
 {
-    "name": "twig-language-2",
-    "displayName": "Twig Language 2",
+    "name": "twig-language-3",
+    "displayName": "Twig Language 3",
     "description": "Snippets, Syntax Highlighting, Hover, and Formatting for Twig with Alpine.js support",
-    "version": "0.10.0",
-    "publisher": "mblode",
+    "version": "0.1.0",
+    "publisher": "RiskTolerance",
     "license": "MIT",
     "author": {
-        "name": "Matthew Blode",
-        "email": "m@blode.co",
-        "url": "https://matthewblode.com"
+        "name": "Isaac Druin",
+        "email": "isaac.druin@gmail.com"
     },
-    "homepage": "https://github.com/mblode/vscode-twig-language-2",
+    "homepage": "https://github.com/RiskTolerance/vscode-twig-language-3",
     "bugs": {
-        "url": "https://github.com/mblode/vscode-twig-language-2/issues"
+        "url": "https://github.com/RiskTolerance/vscode-twig-language-3/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/mblode/vscode-twig-language-2.git"
+        "url": "https://github.com/RiskTolerance/vscode-twig-language-3.git"
     },
     "icon": "images/icon.png",
     "engines": {

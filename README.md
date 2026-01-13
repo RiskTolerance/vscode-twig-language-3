@@ -21,6 +21,16 @@
 - Pretty Diff 3 Formatting
 - Hover
 
+## Credits
+
+**Original Author:** [Matthew Blode](https://matthewblode.com) - [Original Repository](https://github.com/mblode/vscode-twig-language-2)
+
+This is a fork with additional features including:
+- HTML validation/diagnostics
+- Enhanced autocomplete for HTML, Alpine.js, and Twig
+- Improved hover documentation for HTML elements and attributes
+- Better Alpine.js syntax support
+
 ## What has changed since version 1?
 
 This extension does **not** have HTML Intellisense. If you need HTML Intellisense (which can be quite useful), please download my other Twig Language extension: https://github.com/mblode/vscode-twig-language.
