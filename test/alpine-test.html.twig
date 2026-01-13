@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine.js + Twig Test File</title>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    {# ============================================= #}
+    {# Test 1: Basic x-data with simple values #}
+    {# ============================================= #}
+    <div x-data="{ open: false, count: 0 }">
+        <p>Basic Alpine.js component</p>
+    </div>
+
+    {# ============================================= #}
+    {# Test 2: x-show for toggling visibility #}
+    {# ============================================= #}
+    <div x-data="{ visible: true }">
+        <button @click="visible = !visible">Toggle</button>
+        <p x-show="visible">This text can be toggled</p>
+    </div>
+
+    {# ============================================= #}
+    {# Test 3: x-text for dynamic text content #}
+    {# ============================================= #}
+    <div x-data="{ message: 'Hello from Alpine!' }">
+        <p x-text="message"></p>
+    </div>
+
+    {# ============================================= #}
+    {# Test 4: x-on with event shorthand @click #}
+    {# ============================================= #}
+    <div x-data="{ count: 0 }">
+        <button @click="count++">Clicked <span x-text="count"></span> times</button>
+    </div>
+
+    {# ============================================= #}
+    {# Test 5: x-model for two-way binding #}
+    {# ============================================= #}
+    <div x-data="{ name: '' }">
+        <input type="text" x-model="name" placeholder="Enter your name">
+        <p>Hello, <span x-text="name || 'stranger'"></span>!</p>
+    </div>
+
+    {# ============================================= #}
+    {# Test 6: x-bind shorthand :class #}
+    {# ============================================= #}
+    <div x-data="{ isActive: false }">
+        <button @click="isActive = !isActive">Toggle Active</button>
+        <div :class="{ 'active': isActive, 'inactive': !isActive }">
+            Dynamic classes
+        </div>
+    </div>
+
+    {# ============================================= #}
+    {# Test 7: Event modifiers like .prevent and .stop #}
+    {# ============================================= #}
+    <div x-data="{}">
+        <form @submit.prevent="console.log('Form submitted')">
+            <button type="submit">Submit (prevented)</button>
+        </form>
+        <button @click.stop="console.log('Click stopped')">Click (stopped)</button>
+        <input @keydown.enter="console.log('Enter pressed')" placeholder="Press Enter">
+    </div>
+
+    {# ============================================= #}
+    {# Test 8: x-for loop #}
+    {# ============================================= #}
+    <div x-data="{ items: ['Apple', 'Banana', 'Cherry'] }">
+        <ul>
+            <template x-for="item in items" :key="item">
+                <li x-text="item"></li>
+            </template>
+        </ul>
+    </div>
+
+    {# ============================================= #}
+    {# Test 9: x-if conditional #}
+    {# ============================================= #}
+    <div x-data="{ showContent: true }">
+        <button @click="showContent = !showContent">Toggle Content</button>
+        <template x-if="showContent">
+            <p>This is conditionally rendered with x-if</p>
+        </template>
+    </div>
+
+    {# ============================================= #}
+    {# Test 10: Twig variables mixed with Alpine #}
+    {# ============================================= #}
+    <div x-data="{ twigData: {{ items|json_encode|raw }} }">
+        <template x-for="item in twigData" :key="item.id">
+            <div x-text="item.name"></div>
+        </template>
+    </div>
+
+    {# ============================================= #}
+    {# Test 11: x-init for initialization #}
+    {# ============================================= #}
+    <div x-data="{ loaded: false }" x-init="loaded = true">
+        <p x-show="loaded">Component initialized!</p>
+    </div>
+
+    {# ============================================= #}
+    {# Test 12: x-ref and $refs #}
+    {# ============================================= #}
+    <div x-data="{}">
+        <input type="text" x-ref="myInput" placeholder="Focus me">
+        <button @click="$refs.myInput.focus()">Focus Input</button>
+    </div>
+
+    {# ============================================= #}
+    {# Test 13: x-cloak to hide unstyled content #}
+    {# ============================================= #}
+    <div x-data="{ ready: true }" x-cloak>
+        <p x-show="ready">Hidden until Alpine loads</p>
+    </div>
+
+    {# ============================================= #}
+    {# Test 14: Multi-line x-data with methods #}
+    {# ============================================= #}
+    <div x-data="{
+        count: 0,
+        increment() {
+            this.count++
+        },
+        decrement() {
+            this.count--
+        }
+    }">
+        <button @click="decrement()">-</button>
+        <span x-text="count"></span>
+        <button @click="increment()">+</button>
+    </div>
+
+    {# ============================================= #}
+    {# Test 15: x-bind for attributes #}
+    {# ============================================= #}
+    <div x-data="{ url: 'https://alpinejs.dev', disabled: false }">
+        <a :href="url" :disabled="disabled">Visit Alpine.js</a>
+    </div>
+
+    {# ============================================= #}
+    {# Test 16: Twig variables with Alpine #}
+    {# ============================================= #}
+    <div x-data="{
+        userName: '{{ user.name|default('Guest') }}',
+        items: {{ items|json_encode|raw }}
+    }">
+        <p x-text="'Welcome, ' + userName"></p>
+        <template x-for="item in items" :key="item.id">
+            <div x-text="item.name"></div>
+        </template>
+    </div>
+
+    {# ============================================= #}
+    {# Test 17: x-effect for reactive side effects #}
+    {# ============================================= #}
+    <div x-data="{ count: 0 }" x-effect="console.log('Count changed:', count)">
+        <button @click="count++">Increment</button>
+    </div>
+
+    {# ============================================= #}
+    {# Test 18: x-transition for animations #}
+    {# ============================================= #}
+    <div x-data="{ open: false }">
+        <button @click="open = !open">Toggle with Transition</button>
+        <div x-show="open" x-transition>
+            <p>Animated content</p>
+        </div>
+    </div>
+
+    {# ============================================= #}
+    {# Test 19: Magic properties #}
+    {# ============================================= #}
+    <div x-data="{ items: [] }" x-init="$watch('items', value => console.log(value))">
+        <button @click="items.push('new')">Add Item</button>
+        <button @click="$dispatch('custom-event', { data: 'test' })">Dispatch</button>
+        <p x-text="$el.tagName"></p>
+    </div>
+
+    {# ============================================= #}
+    {# Test 20: Nested components #}
+    {# ============================================= #}
+    <div x-data="{ parentValue: 'parent' }">
+        <p x-text="parentValue"></p>
+        <div x-data="{ childValue: 'child' }">
+            <p x-text="childValue"></p>
+            <p x-text="$root.parentValue"></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -5,7 +5,7 @@
 <h1>VS Code Twig Language 2 👋</h1>
 
 <p>
-  <img src="https://img.shields.io/badge/version-0.8.8-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/version-0.10.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/mblode/vscode-twig-language-2/graphs/commit-activity">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" />
   </a>
@@ -15,6 +15,7 @@
 </p>
 
 - Syntax highlighting
+- Alpine.js syntax highlighting
 - Snippets
 - Emmet
 - Pretty Diff 3 Formatting
@@ -55,9 +56,37 @@ Twig Language 2 is a Visual Studio Code extension that provides snippets, syntax
 
 This extension provides language support for the Twig syntax.
 
+### Alpine.js syntax highlighting
+
+This extension provides syntax highlighting for Alpine.js directives and expressions within Twig templates. Supported features include:
+
+- **Directives**: `x-data`, `x-show`, `x-bind`, `x-on`, `x-model`, `x-text`, `x-html`, `x-ref`, `x-if`, `x-for`, `x-transition`, `x-effect`, `x-cloak`, `x-ignore`, `x-id`, `x-teleport`, `x-modelable`, and more
+- **Shorthand syntax**: `@click` (for `x-on:click`), `:class` (for `x-bind:class`)
+- **JavaScript highlighting**: JavaScript expressions within Alpine.js attributes are syntax highlighted
+- **Hover documentation**: Hover over Alpine.js directives and magic properties (`$el`, `$refs`, `$store`, etc.) to see documentation
+
+Example:
+```twig
+<div x-data="{ open: false }">
+    <button @click="open = !open" :class="{ active: open }">
+        Toggle
+    </button>
+    <div x-show="open" x-transition>
+        Content
+    </div>
+</div>
+```
+
 ### Code formatter/beautifier for Twig files
 
 Using PrettyDiff, this extension implements the only working code formatter for Twig files in VS Code.
+
+**Known Limitations:**
+
+- **Multi-line Alpine.js attributes**: When using multi-line JavaScript objects in Alpine.js attributes (e.g., `x-data="{ count: 0 }"`), the formatter may reformat the content inside the attribute value. This is a limitation of PrettyDiff's HTML formatter. To avoid this:
+  - Use single-line attributes when possible
+  - Disable format on save for files with multi-line Alpine attributes: Add `"[twig]": { "editor.formatOnSave": false }` to your VS Code settings
+  - Or use Prettier with a Twig plugin as an alternative formatter
 
 ### Information about Twig code on hover
 
@@ -225,5 +254,5 @@ Give a ⭐️ if this project helped you !
 
 ## 📝 License
 
-Copyright © 2019 [Matthew Blode](https://github.com/mblode).<br />
+Copyright © 2024 [Matthew Blode](https://github.com/mblode).<br />
 This project is [MIT](https://github.com/mblode/vscode-twig-language-2/blob/master/LICENSE.md) licensed.

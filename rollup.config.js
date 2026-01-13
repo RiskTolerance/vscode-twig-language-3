@@ -1,4 +1,4 @@
-import json from 'rollup-plugin-json';
+import json from '@rollup/plugin-json';
 
 export default [
     {
@@ -7,6 +7,7 @@ export default [
             file: 'extension/index.js',
             format: 'cjs'
         },
+        external: ['vscode', 'js-beautify'],
         plugins: [
             json({
                 // All JSON files will be parsed by default,

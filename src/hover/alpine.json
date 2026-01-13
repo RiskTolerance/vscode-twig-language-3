@@ -1,0 +1,155 @@
+{
+    "x-data": {
+        "prefix": "x-data",
+        "hover": "x-data",
+        "description": "Declares a new component scope. The expression is evaluated once and its return value becomes the component's data object.",
+        "example": "<div x-data=\"{ open: false, count: 0 }\">\n    <button @click=\"open = !open\">Toggle</button>\n</div>"
+    },
+    "x-init": {
+        "prefix": "x-init",
+        "hover": "x-init",
+        "description": "Runs an expression when a component is initialized. Can be used to run code when an element is added to the DOM.",
+        "example": "<div x-data=\"{ count: 0 }\" x-init=\"count = 5\">\n    <span x-text=\"count\"></span>\n</div>"
+    },
+    "x-show": {
+        "prefix": "x-show",
+        "hover": "x-show",
+        "description": "Toggles visibility of an element based on the truthiness of the expression.",
+        "example": "<div x-show=\"open\">\n    This element is visible when open is true\n</div>"
+    },
+    "x-bind": {
+        "prefix": "x-bind",
+        "hover": "x-bind",
+        "description": "Dynamically sets HTML attributes. The attribute name is specified after the colon.",
+        "example": "<div x-bind:class=\"{ active: isActive }\">\n    <!-- Shorthand: :class=\"{ active: isActive }\" -->\n</div>"
+    },
+    "x-on": {
+        "prefix": "x-on",
+        "hover": "x-on",
+        "description": "Attaches an event listener to an element. The event name is specified after the colon.",
+        "example": "<button x-on:click=\"handleClick()\">\n    <!-- Shorthand: @click=\"handleClick()\" -->\n</button>"
+    },
+    "x-model": {
+        "prefix": "x-model",
+        "hover": "x-model",
+        "description": "Creates two-way data bindings. Works with input, textarea, select, and checkbox elements.",
+        "example": "<input x-model=\"name\" type=\"text\">\n<span x-text=\"name\"></span>"
+    },
+    "x-text": {
+        "prefix": "x-text",
+        "hover": "x-text",
+        "description": "Sets the text content of an element to the result of the expression.",
+        "example": "<div x-data=\"{ name: 'Alpine.js' }\">\n    <span x-text=\"name\"></span>\n</div>"
+    },
+    "x-html": {
+        "prefix": "x-html",
+        "hover": "x-html",
+        "description": "Sets the inner HTML of an element to the result of the expression. Use with caution to avoid XSS vulnerabilities.",
+        "example": "<div x-html=\"htmlContent\"></div>"
+    },
+    "x-ref": {
+        "prefix": "x-ref",
+        "hover": "x-ref",
+        "description": "Creates a reference to an element that can be accessed via $refs.",
+        "example": "<div x-ref=\"myElement\"></div>\n<button @click=\"$refs.myElement.scrollIntoView()\">Scroll</button>"
+    },
+    "x-if": {
+        "prefix": "x-if",
+        "hover": "x-if",
+        "description": "Conditionally renders an element. The element is removed from the DOM when false. Must be used on a template tag.",
+        "example": "<template x-if=\"open\">\n    <div>This is conditionally rendered</div>\n</template>"
+    },
+    "x-for": {
+        "prefix": "x-for",
+        "hover": "x-for",
+        "description": "Creates a new DOM node for each item in an array. Must be used on a template tag.",
+        "example": "<template x-for=\"item in items\" :key=\"item.id\">\n    <div x-text=\"item.name\"></div>\n</template>"
+    },
+    "x-transition": {
+        "prefix": "x-transition",
+        "hover": "x-transition",
+        "description": "Applies transition classes at various stages throughout an element's transition.",
+        "example": "<div x-show=\"open\" x-transition>\n    <div x-transition:enter=\"transition ease-out duration-300\">\n        Content\n    </div>\n</div>"
+    },
+    "x-effect": {
+        "prefix": "x-effect",
+        "hover": "x-effect",
+        "description": "Runs an expression whenever a reactive dependency changes. Similar to x-init but reactive.",
+        "example": "<div x-data=\"{ count: 0 }\" x-effect=\"console.log('Count:', count)\">\n    <button @click=\"count++\">Increment</button>\n</div>"
+    },
+    "x-cloak": {
+        "prefix": "x-cloak",
+        "hover": "x-cloak",
+        "description": "Hides elements until Alpine has finished initializing. Useful for preventing flash of unstyled content.",
+        "example": "<div x-data=\"{ open: false }\" x-cloak>\n    <div x-show=\"open\">Content</div>\n</div>"
+    },
+    "x-ignore": {
+        "prefix": "x-ignore",
+        "hover": "x-ignore",
+        "description": "Prevents Alpine from initializing on the element and all child elements.",
+        "example": "<div x-ignore>\n    <div x-data=\"{}\">This won't be initialized</div>\n</div>"
+    },
+    "x-id": {
+        "prefix": "x-id",
+        "hover": "x-id",
+        "description": "Generates a unique ID based on the provided string. Useful for creating unique IDs for form elements.",
+        "example": "<label :for=\"$id('input')\">Label</label>\n<input :id=\"$id('input')\" type=\"text\">"
+    },
+    "x-teleport": {
+        "prefix": "x-teleport",
+        "hover": "x-teleport",
+        "description": "Teleports an element to another part of the DOM. Useful for modals and tooltips.",
+        "example": "<div x-teleport=\"body\">\n    This content will be moved to the body\n</div>"
+    },
+    "x-modelable": {
+        "prefix": "x-modelable",
+        "hover": "x-modelable",
+        "description": "Makes a component property bindable with x-model.",
+        "example": "<div x-data=\"{ value: 'Hello' }\" x-modelable=\"value\">\n    <input x-model=\"value\">\n</div>"
+    },
+    "$el": {
+        "hover": "$el",
+        "description": "Magic property that references the root element of the component.",
+        "example": "<div x-data=\"{}\" @click=\"$el.classList.toggle('active')\">\n    Click me\n</div>"
+    },
+    "$refs": {
+        "hover": "$refs",
+        "description": "Magic property that provides access to elements marked with x-ref.",
+        "example": "<div x-ref=\"myDiv\"></div>\n<button @click=\"$refs.myDiv.scrollIntoView()\">Scroll</button>"
+    },
+    "$store": {
+        "hover": "$store",
+        "description": "Magic property that provides access to global Alpine stores.",
+        "example": "<div x-data=\"{}\">\n    <span x-text=\"$store.user.name\"></span>\n</div>"
+    },
+    "$watch": {
+        "hover": "$watch",
+        "description": "Magic method that watches a component property for changes.",
+        "example": "<div x-data=\"{ count: 0 }\" x-init=\"$watch('count', value => console.log(value))\">\n    <button @click=\"count++\">Increment</button>\n</div>"
+    },
+    "$dispatch": {
+        "hover": "$dispatch",
+        "description": "Magic method that dispatches a custom event that can be listened to with x-on or @.",
+        "example": "<button @click=\"$dispatch('custom-event', { data: 'value' })\">\n    Dispatch Event\n</button>"
+    },
+    "$nextTick": {
+        "hover": "$nextTick",
+        "description": "Magic method that executes a callback after Alpine has finished updating the DOM.",
+        "example": "<div x-data=\"{ count: 0 }\" x-init=\"$nextTick(() => console.log('DOM updated'))\">\n    <span x-text=\"count\"></span>\n</div>"
+    },
+    "$root": {
+        "hover": "$root",
+        "description": "Magic property that references the root Alpine component.",
+        "example": "<div x-data=\"{ count: 0 }\">\n    <div x-data=\"{}\">\n        <span x-text=\"$root.count\"></span>\n    </div>\n</div>"
+    },
+    "$data": {
+        "hover": "$data",
+        "description": "Magic property that returns the raw data object for the current component.",
+        "example": "<div x-data=\"{ name: 'Alpine' }\">\n    <span x-text=\"JSON.stringify($data)\"></span>\n</div>"
+    },
+    "$id": {
+        "hover": "$id",
+        "description": "Magic method that generates a unique ID based on the provided string.",
+        "example": "<label :for=\"$id('input')\">Label</label>\n<input :id=\"$id('input')\" type=\"text\">"
+    }
+}
