@@ -7,7 +7,7 @@ export default [
             file: 'extension/index.js',
             format: 'cjs'
         },
-        external: ['vscode', 'js-beautify'],
+        external: ['vscode', 'js-beautify', 'vscode-html-languageservice', 'vscode-languageserver-textdocument'],
         plugins: [
             json({
                 // All JSON files will be parsed by default,

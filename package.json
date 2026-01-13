@@ -87,6 +87,16 @@
                     "default": true,
                     "description": "Whether to enable/disable Twig PrettyDiff formatting."
                 },
+                "twig-language-2.validation": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable HTML validation and diagnostics."
+                },
+                "twig-language-2.autocomplete": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable autocomplete (IntelliSense) for HTML, Alpine.js, and Twig."
+                },
                 "twig-language-2.braceLine": {
                     "type": "boolean",
                     "default": false,
@@ -322,13 +332,15 @@
         "@rollup/plugin-json": "^6.1.0",
         "@types/mocha": "^10.0.6",
         "@types/node": "^20.11.0",
+        "@types/vscode": "^1.80.0",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
         "rollup": "^4.9.0",
-        "typescript": "^5.3.3",
-        "@types/vscode": "^1.80.0"
+        "typescript": "^5.3.3"
     },
     "dependencies": {
-        "js-beautify": "^1.15.4"
+        "js-beautify": "^1.15.4",
+        "vscode-html-languageservice": "^5.6.1",
+        "vscode-languageserver-textdocument": "^1.0.12"
     }
 }

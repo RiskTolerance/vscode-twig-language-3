@@ -1,5 +1,9 @@
 import vscode from 'vscode'
 import { html as beautifyHtml } from 'js-beautify'
+import { getLanguageService } from 'vscode-html-languageservice'
+import { TextDocument } from 'vscode-languageserver-textdocument'
+import { initializeDiagnostics } from './diagnostics'
+import { initializeCompletions, provideCompletions } from './completions'
 import snippetsArr from './hover/filters.json'
 import functionsArr from './hover/functions.json'
 import twigArr from './hover/twig.json'
@@ -7,6 +11,9 @@ import alpineArr from './hover/alpine.json'
 
 const editor = vscode.workspace.getConfiguration('editor');
 const config = vscode.workspace.getConfiguration('twig-language-2');
+
+// Initialize HTML language service for hover support
+let htmlLanguageService;
 
 function createHover(snippet, type) {
     const example = typeof snippet.example == 'undefined' ? '' : snippet.example
@@ -71,6 +78,29 @@ function activate(context) {
     const active = vscode.window.activeTextEditor
     if (!active || !active.document) return
 
+    // Initialize HTML language service for hover and diagnostics
+    htmlLanguageService = getLanguageService({
+        customDataProviders: []
+    });
+
+    // Initialize diagnostics
+    if (config.validation !== false) {
+        initializeDiagnostics(context);
+    }
+
+    // Initialize completions
+    if (config.autocomplete !== false) {
+        initializeCompletions(context, htmlLanguageService);
+        
+        context.subscriptions.push(
+            vscode.languages.registerCompletionItemProvider('twig', {
+                provideCompletionItems(document, position, token, context) {
+                    return provideCompletions(document, position, token, context);
+                }
+            })
+        );
+    }
+
     registerDocType('twig');
 
     function registerDocType(type) {
@@ -109,6 +139,33 @@ function activate(context) {
                     for (const snippet in alpineArr) {
                         if (alpineArr[snippet].prefix == word || alpineArr[snippet].hover == word) {
                             return createHover(alpineArr[snippet], type)
+                        }
+                    }
+
+                    // Fallback to HTML language service for HTML elements and attributes
+                    if (htmlLanguageService) {
+                        const lsDocument = TextDocument.create(
+                            document.uri.toString(),
+                            document.languageId,
+                            document.version,
+                            document.getText()
+                        );
+                        
+                        const htmlHover = htmlLanguageService.doHover(
+                            lsDocument,
+                            { line: position.line, character: position.character },
+                            htmlLanguageService.parseHTMLDocument(lsDocument)
+                        );
+                        
+                        if (htmlHover && htmlHover.contents) {
+                            // Convert Language Server hover to VS Code hover
+                            const contents = Array.isArray(htmlHover.contents) 
+                                ? htmlHover.contents.map(c => typeof c === 'string' ? c : c.value).join('\n\n')
+                                : typeof htmlHover.contents === 'string' 
+                                    ? htmlHover.contents 
+                                    : htmlHover.contents.value;
+                            
+                            return new vscode.Hover(contents);
                         }
                     }
                 }
