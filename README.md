@@ -1,15 +1,15 @@
-<a href="https://marketplace.visualstudio.com/items?itemName=mblode.twig-language-2">
-  <img src="https://github.com/mblode/vscode-twig-language-2/blob/master/images/icon.png?raw=true" alt="" width=100 height=100>
+<a href="https://marketplace.visualstudio.com/items?itemName=risktolerance.twig-language-3">
+  <img src="https://github.com/RiskTolerance/vscode-twig-language-3/blob/master/images/icon.png?raw=true" alt="" width=100 height=100>
 </a>
 
-<h1>VS Code Twig Language 2 👋</h1>
+<h1>VS Code Twig Language 3 👋</h1>
 
 <p>
-  <img src="https://img.shields.io/badge/version-0.10.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/mblode/vscode-twig-language-2/graphs/commit-activity">
+  <img src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/RiskTolerance/vscode-twig-language-3/graphs/commit-activity">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" />
   </a>
-  <a href="https://github.com/mblode/vscode-twig-language-2/blob/master/LICENSE.md">
+  <a href="https://github.com/RiskTolerance/vscode-twig-language-3/blob/master/LICENSE.md">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
   </a>
 </p>
@@ -18,8 +18,10 @@
 - Alpine.js syntax highlighting
 - Snippets
 - Emmet
-- Pretty Diff 3 Formatting
-- Hover
+- Code formatting (js-beautify)
+- Hover documentation
+- HTML validation/diagnostics
+- Enhanced autocomplete
 
 ## Credits
 
@@ -31,13 +33,15 @@ This is a fork with additional features including:
 - Improved hover documentation for HTML elements and attributes
 - Better Alpine.js syntax support
 
-## What has changed since version 1?
+## Installation
 
-This extension does **not** have HTML Intellisense. If you need HTML Intellisense (which can be quite useful), please download my other Twig Language extension: https://github.com/mblode/vscode-twig-language.
+Install through Visual Studio Code extensions. Search for `Twig Language 3`
 
-I have created a new extension to fix the issues that I (and all of you) were having with file association, commenting and VS Code UI issues.
+[Visual Studio Code Market Place: Twig Language 3](https://marketplace.visualstudio.com/items?itemName=risktolerance.twig-language-3)
 
-Simply add these lines to your VS Code settings to get emmet working and also to associate HTML files as twig syntax.
+## Configuration
+
+Simply add these lines to your VS Code settings to get emmet working and also to associate HTML files as twig syntax:
 
 ```
 "files.associations": {
@@ -48,19 +52,11 @@ Simply add these lines to your VS Code settings to get emmet working and also to
 },
 ```
 
-## Installation
-
-Install through Visual Studio Code extensions. Search for `Twig Language 2`
-
-[Visual Studio Code Market Place: Twig Language 2](https://marketplace.visualstudio.com/items?itemName=mblode.twig-language-2)
-
-## Configuration
-
-Restart VS Code after making changes to Twig Language 2 extension settings.
+Restart VS Code after making changes to Twig Language 3 extension settings.
 
 ## Documentation
 
-Twig Language 2 is a Visual Studio Code extension that provides snippets, syntax highlighting, hover, and formatting for the Twig file format.
+Twig Language 3 is a Visual Studio Code extension that provides snippets, syntax highlighting, hover, formatting, validation, and autocomplete for the Twig file format.
 
 ### Twig syntax highlighting and language support
 
@@ -89,18 +85,21 @@ Example:
 
 ### Code formatter/beautifier for Twig files
 
-Using PrettyDiff, this extension implements the only working code formatter for Twig files in VS Code.
+Using js-beautify, this extension provides code formatting for Twig files in VS Code. The formatter supports HTML structure formatting while preserving Twig syntax.
 
 **Known Limitations:**
 
-- **Multi-line Alpine.js attributes**: When using multi-line JavaScript objects in Alpine.js attributes (e.g., `x-data="{ count: 0 }"`), the formatter may reformat the content inside the attribute value. This is a limitation of PrettyDiff's HTML formatter. To avoid this:
+- **Multi-line Alpine.js attributes**: When using multi-line JavaScript objects in Alpine.js attributes (e.g., `x-data="{ count: 0 }"`), the formatter may reformat the content inside the attribute value. To avoid this:
   - Use single-line attributes when possible
   - Disable format on save for files with multi-line Alpine attributes: Add `"[twig]": { "editor.formatOnSave": false }` to your VS Code settings
   - Or use Prettier with a Twig plugin as an alternative formatter
 
-### Information about Twig code on hover
+### Information about code on hover
 
-VS Code Twig language 2 shows information about the symbol/object that's below the mouse cursor when you hover within Twig files.
+Twig Language 3 shows information about the symbol/object that's below the mouse cursor when you hover within Twig files. Hover support includes:
+- Twig filters and functions
+- Alpine.js directives and magic properties
+- HTML elements and attributes
 
 ### Craft CMS/Twig code snippets
 
@@ -248,15 +247,33 @@ info            All craft globals (site info, date, users, template tags)
 
 ```
 
+### HTML validation and diagnostics
+
+Twig Language 3 includes HTML validation that detects:
+- Unclosed or mismatched HTML tags
+- Invalid HTML structure
+- Nesting rule violations
+
+Diagnostics are displayed inline in the editor, helping you catch errors before runtime.
+
+### Autocomplete (IntelliSense)
+
+Context-aware autocomplete is available for:
+- **HTML tags and attributes** - Standard HTML elements and their attributes
+- **Alpine.js directives** - `x-data`, `x-show`, `@click`, `:class`, and more
+- **Alpine.js modifiers** - `.prevent`, `.stop`, `.once`, etc.
+- **Twig tags** - `if`, `for`, `block`, etc. when inside `{% %}`
+- **Twig filters** - `raw`, `escape`, `date`, etc. after `|`
+
 ## Author
 
-👤 **Matthew Blode**
+👤 **Isaac Druin**
 
-* Github: [@mblode](https://github.com/mblode)
+* Github: [@RiskTolerance](https://github.com/RiskTolerance)
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome !<br />Feel free to check [issues page](https://github.com/mblode/vscode-twig-language-2/issues).
+Contributions, issues and feature requests are welcome !<br />Feel free to check [issues page](https://github.com/RiskTolerance/vscode-twig-language-3/issues).
 
 ## Show your support
 
@@ -264,5 +281,5 @@ Give a ⭐️ if this project helped you !
 
 ## 📝 License
 
-Copyright © 2024 [Matthew Blode](https://github.com/mblode).<br />
-This project is [MIT](https://github.com/mblode/vscode-twig-language-2/blob/master/LICENSE.md) licensed.
+Copyright © 2024 [Isaac Druin](https://github.com/RiskTolerance).<br />
+This project is [MIT](https://github.com/RiskTolerance/vscode-twig-language-3/blob/master/LICENSE.md) licensed.
